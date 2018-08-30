@@ -1,19 +1,19 @@
 package com.distudio.learn.demo.touch;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-
 import com.distudio.learn.demo.R;
 
 
 public class RotateWith2Fingers  extends android.support.v7.widget.AppCompatImageView{
     private Drawable mIcon;
+
+    private float newRot = 0f;
+    private float d = 0f;
+    private float r = 0f;
 
     public RotateWith2Fingers(Context context) {
         this(context, null, 0);
@@ -38,21 +38,11 @@ public class RotateWith2Fingers  extends android.support.v7.widget.AppCompatImag
         canvas.restore();
     }
 
-
-
-    private float newRot = 0f;
-    private float d = 0f;
-    private float r = 0f;
-    PointF start = new PointF();
-
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();
         switch (action & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN: {
-                start.set(ev.getX(), ev.getY());
-                break;
-            }
+
             case MotionEvent.ACTION_POINTER_DOWN: // first and second finger down
                 d = rotation(ev);
                 break;
